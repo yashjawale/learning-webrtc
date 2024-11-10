@@ -47,7 +47,8 @@
 .control-container {
   background-color: rgb(179, 102, 249, 0.9);
   color: white;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   padding: 20px;
   border-radius: 12px;
   text-align: center;
