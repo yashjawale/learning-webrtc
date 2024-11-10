@@ -37,7 +37,7 @@ let init = async () => {
   channel.on('MemberLeft', handleUserLeft)
   client.on('MessageFromPeer', handleMessageFromPeer)
 
-  localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+  localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true })
   document.getElementById('user-1').srcObject = localStream
 }
 
@@ -74,7 +74,8 @@ let createPeerConnection = async (MemberId) => {
   document.getElementById('user-2').style.display = 'block'
 
   if (!localStream) {
-    localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+    localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+    console.log(localStream)
     document.getElementById('user-1').srcObject = localStream
   }
 
@@ -123,6 +124,30 @@ let leaveChannel = async () => {
   await client.logout()
 }
 
+let toggleCamera = async () => {
+  let videoTrack = localStream.getTracks().find(track => track.kind === 'video')
+  if (videoTrack.enabled) {
+    videoTrack.enabled = false
+    document.getElementById('camera-btn').style.backgroundColor = 'rgb(255, 80, 80, 0.7)'
+  } else {
+    videoTrack.enabled = true
+    document.getElementById('camera-btn').style.backgroundColor = 'rgb(179, 102, 249, 0.9)'
+  }
+}
+
+let toggleMic = async () => {
+  let audioTrack = localStream.getTracks().find(track => track.kind === 'audio')
+  if (audioTrack.enabled) {
+    audioTrack.enabled = false
+    document.getElementById('mic-btn').style.backgroundColor = 'rgb(255, 80, 80, 0.7)'
+  } else {
+    audioTrack.enabled = true
+    document.getElementById('mic-btn').style.backgroundColor = 'rgb(179, 102, 249, 0.9)'
+  }
+}
+
 window.addEventListener('beforeunload', leaveChannel)
+document.getElementById('camera-btn').addEventListener('click', toggleCamera)
+document.getElementById('mic-btn').addEventListener('click', toggleMic)
 
 init()
