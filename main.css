@@ -15,7 +15,7 @@
   background-color: black;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 #user-2 {
@@ -61,4 +61,15 @@ a {
 
 #leave-btn {
   background-color: rgb(255, 80, 80, 1);
+}
+
+@media screen and (max-width: 600px) {
+  .small-frame {
+    height: 80px;
+    width: 120px;
+  }
+
+  .control-container {
+    font-size: 14px;
+  }
 }
